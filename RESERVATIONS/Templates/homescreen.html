@@ -1,0 +1,81 @@
+<!DOCTYPE html>   
+<html>   
+<head>  
+<meta name="viewport" content="width=device-width, initial-scale=1">  
+<title> Table Reservation - Home/Guest Page </title>  
+<link rel="stylesheet" type="text/css" href="../Styles/styling.css">   
+</head>
+<header>
+    <a href="homescreen.html">
+        <h3 class="header-logo"> RESTAURANT RESERVATION </h3>
+    </a>
+    <div class="navigation">
+      <nav>
+        <ul>
+          <li><a href="homescreen.html">Home</a></li>
+          <li><a href="aboutpage.html">About Us</a></li>
+          <li><a href="loginscreen.html">Login</a></li>
+          <li><a href="registerpage.html">Register</a></li>
+        </ul>
+      </nav>
+    </div>
+</header>
+<body>
+    <br> <br> <center> <h1 style="color: white; font-family: Yeseva One;">Guest Reservation</h1> </center>   
+    <form>
+        <div class="container">
+            <label style="font-size:larger" style="color:rgb(0, 0, 0)" for="name">Name: </label>
+                <input 
+                    type="text" 
+                    id ="name"
+                    name="name"
+                    placeholder="Enter name"
+                    maxlength = "50" 
+                    required
+                >
+                <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="email">Email: </label>
+                <input 
+                    type="email"  
+                    id="email"
+                    name="email" 
+                    placeholder="Enter email"
+                    required
+                >
+                <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="phone">Phone Number: </label>
+                <input 
+                    type="tel" 
+                    id="phone" 
+                    name="phone" 
+                    placeholder="Enter phone number"
+                >       
+                <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="guests">Number of Guests: </label>
+                <input
+                    type="number"
+                    id="guests" 
+                    name="guests"
+                    placeholder="Enter number of guests"  
+                    required
+                >
+                <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="res_date">Date: </label>
+                <input 
+                    type="date"
+                    id="res_date"  
+                    name="res_date" 
+                    required
+                >
+                <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="res_time">Time: </label>
+                <input 
+                    type="time"
+                    id="res_time"      
+                    name="res_time"
+                    required
+                >
+               
+               <center>       
+                   <h1 style="font-size:large" style="color:rgb(4, 0, 255)">Do not have an account with us? Join us for member rewards! <a href="registerpage.html"> Sign Up </a>  </h1>
+               </center>
+               <button type="submit">SUBMIT </button>               
+        </div>
+    </form>
+</body>
+</html>

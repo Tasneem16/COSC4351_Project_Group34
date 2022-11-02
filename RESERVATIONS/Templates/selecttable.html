@@ -1,0 +1,41 @@
+<!DOCTYPE html>   
+<html>   
+<head>  
+<meta name="viewport" content="width=device-width, initial-scale=1">  
+<title> Table Reservation - Select Tables </title>  
+<link rel="stylesheet" type="text/css" href="../Styles/styling.css">   
+</head>
+<header>
+    <a href="homescreen.html">
+        <h3 class="header-logo"> RESTAURANT RESERVATION </h3>
+    </a>
+    <div class="navigation">
+      <nav>
+        <ul>
+          <li><a href="reservations.html">Your Reservations</a></li>
+          <li><a href="payments.html">Payment Info</a></li>
+          <li><a href="reserving.html">Reserve Table</a></li>
+          <li><a href="myaccount.html">My Profile</a></li>
+          <li><a href="aboutpage.html">About Us</a></li>
+          <li><a href="loginscreen.html">Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+</header>
+<body>
+    <br> <br> <center> <h1 style="color: white; font-family: Yeseva One;">Table Selection</h1> </center>   
+    <form>
+        <div class="container">
+            <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="tables"><b>Select necessary table(s): </b></label>
+            <br>
+                    <select class="tables" id="tables" name="tables" multiple required>
+                        <option value="Table 1 (Max Capacity: 2)">Table 1 (Max Capacity: 2)</option>
+                        <option value="Table 2 (Max Capacity: 4)">Table 2 (Max Capacity: 4)</option>
+                        <option value="Table 3 (Max Capacity: 6)">Table 3 (Max Capacity: 6)</option>
+                        <option value="Table 4 (Max Capacity: 8)">Table 4 (Max Capacity: 8)</option>
+                    </select>
+            <button type="submit">SUBMIT </button>
+        </div>
+    </form>
+</body>
+</html>

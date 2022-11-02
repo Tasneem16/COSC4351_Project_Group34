@@ -1,0 +1,53 @@
+<!DOCTYPE html>   
+<html>   
+<head>  
+<meta name="viewport" content="width=device-width, initial-scale=1">  
+<title> Table Reservation - Login Page </title>  
+<link rel="stylesheet" type="text/css" href="../Styles/styling.css">   
+</head>
+<header>
+    <a href="homescreen.html">
+        <h3 class="header-logo"> RESTAURANT RESERVATION </h3>
+    </a>
+    <div class="navigation">
+      <nav>
+        <ul>
+          <li><a href="homescreen.html">Home</a></li>
+          <li><a href="aboutpage.html">About Us</a></li>
+          <li><a href="loginscreen.html">Login</a></li>
+          <li><a href="registerpage.html">Register</a></li>
+        </ul>
+      </nav>
+    </div>
+</header>
+<body>
+    <br> <br> <center> <h1 style="color: white; font-family: Yeseva One;">User Login</h1> </center>   
+    <form>
+        <div class="container">
+                <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="email">Email: </label>
+                <input 
+                    type="email"  
+                    id="email"
+                    name="email" 
+                    placeholder="Enter email"
+                    required
+                >
+                
+                <label style="font-size:larger" style="color:rgb(0, 0, 0)" for="password">Password: </label>
+                <input
+                    type="password"
+                    id="password1"
+                    name="password1"
+                    placeholder="Enter password"
+                    required
+                >
+                
+            <br> <br> <input type="checkbox"> Remember me <br>
+            <button type="submit">LOGIN</button> <br>
+            <center>       
+            <h1 style="font-size:large" style="color:rgb(4, 0, 255)">Don't have an account? <a href="registerpage.html"> Register Here </a>  </h1>
+            </center>               
+        </div>
+    </form>
+</body>
+</html>
