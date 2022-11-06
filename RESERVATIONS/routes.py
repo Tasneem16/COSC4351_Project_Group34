@@ -3,9 +3,9 @@ import os
 from PIL import Image
 from flask import render_template, url_for, flash, redirect, request, Markup
 from flask_mail import Message
-from tableres import app, db, bcrypt, mail
-from tableres.forms import RegistrationForm, LoginForm, ReservationForm, UpdateAccountForm, CreditcardForm, TableForm
-from tableres.models import User, Reservation, Tables, Creditcard
+from RESERVATIONS import app, db, bcrypt, mail
+from RESERVATIONS.forms import RegistrationForm, LoginForm, ReservationForm, UpdateAccountForm, CreditcardForm, TableForm
+from RESERVATIONS.models import User, Reservation, Tables, Creditcard
 from flask_login import login_user, current_user, logout_user, login_required
 
 

@@ -1,5 +1,5 @@
 from datetime import datetime
-from tableres import db, login_manager
+from RESERVATIONS import db, login_manager
 from flask_login import UserMixin, AnonymousUserMixin
 
 @login_manager.user_loader

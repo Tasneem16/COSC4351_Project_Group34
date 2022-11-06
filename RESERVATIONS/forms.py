@@ -5,7 +5,7 @@ from wtforms import TextAreaField, TelField, StringField, PasswordField, SubmitF
     DateField, TimeField, SelectMultipleField
 from datetime import datetime, time
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from tableres.models import User, Reservation, Tables, Creditcard
+from RESERVATIONS.models import User, Reservation, Tables, Creditcard
 
 
 # class RegistrationForm(FlaskForm):
