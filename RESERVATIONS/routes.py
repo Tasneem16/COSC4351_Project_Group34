@@ -33,11 +33,7 @@ def home():
             if total < 20:
                 db.session.add(reservation)
                 db.session.commit()
-                msg = Message('New Reservation', sender='tempsender6@gmail.com',
-                              recipients=['rajbhadola408@gmail.com', formres.email.data])
-                bodymsg = 'New reservation made please ensure the seating is available. for more details signin the system.'
-                msg.body = bodymsg
-                mail.send(msg)
+                
                 flash(Markup(
                     'Please <a href="/register" class="alert-link">Create an account</a> for the best user experience!!'),
                       'success')
@@ -174,10 +170,7 @@ def reserve():
         if total < 20:
             db.session.add(reservation)
             db.session.commit()
-            msg = Message('New Reservation', sender='tempsender6@gmail.com', recipients=['rajbhadola408@gmail.com', form1.email.data])
-            bodymsg = 'New reservation made please ensure the seating is available. for more details signin the system.'
-            msg.body = bodymsg
-            mail.send(msg)
+            
             resquery = Creditcard.query.filter_by(user_id=current_user.id)
             for i in resquery:
                 if current_user.id == i.user_id:
