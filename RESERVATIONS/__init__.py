@@ -1,40 +1,31 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from os import path
+from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
-
-db = SQLAlchemy()
-DB_NAME = "database.db"
+from flask_mail import Mail, Message
 
 
-def create_app():
-    app = Flask(__name__)
-    app.config['SECRET_KEY'] = 'xnskcndkv'
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
-    db.init_app(app)
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'fc2c5762da84768ed6248d780c1869b7'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 
-    from .views import views
-    from .auth import auth
+##ALL THIS IF YOU WANT TO SEND ACCOUNT CREATION EMAIL
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = 'tempsender6@gmail.com'
+app.config['MAIL_PASSWORD'] = '@Temp0912'
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
 
-    app.register_blueprint(views, url_prefix='/')
-    app.register_blueprint(auth, url_prefix='/')
 
-    from .models import User, Profile, Quote
+mail = Mail(app)
+##UNTIL HERE
 
-    create_database(app)
+db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
+login_manager = LoginManager(app)
+login_manager.login_view = 'login'
+login_manager.login_message_category = 'info'
 
-    login_manager = LoginManager()
-    login_manager.login_view = 'auth.login'
-    login_manager.init_app(app)
+from tableres import routes
 
-    @login_manager.user_loader
-    def load_user(id):
-        return User.query.get(int(id))
-
-    return app
-
-# this is replace the old data with the new data
-def create_database(app):
-    if not path.exists('Fuel_Go/' + DB_NAME):
-        db.create_all(app=app)
-        print('Created Database!')
