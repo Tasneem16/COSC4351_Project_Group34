@@ -3,7 +3,7 @@ COSC 4351 Software Engineering with Raj Singh
 This is Group 34: Dillon Zachariah, Satya Sai Sribhashyam, Tasneem Patel
 
 Description:
-  This is a tabel reservation application for a restaurat chain. 
+  This is a table reservation application for a restaurat chain. 
   
 Details:
   Two categories of users / customers: guest user or registered user
