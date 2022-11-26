@@ -1,0 +1,70 @@
+{% extends "basepage.html" %}
+{% block title %}
+    Table Reservation - User Reservation
+{% endblock %}
+{% block content%}
+
+<head> 
+<link rel="stylesheet" type="text/css" href="../static/Styles/styling.css">   
+</head>
+
+<form method = "POST">
+<body>
+    <center> <h1 style="color: black; font-family: Yeseva One;">Registered User Reservation</h1> </center>   
+        <div class="container">
+            <label style="font-size:larger" style="color:rgb(0, 0, 0)" for="name">Name: </label>
+                <input 
+                    type="text" 
+                    id ="name"
+                    name="name"
+                    placeholder="Enter name"
+                    value = "{{name}}"
+                    readonly
+                >
+                <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="email">Email: </label>
+                <input 
+                    type="email"  
+                    id="email"
+                    name="email"
+                    placeholder="Enter email"
+                    value = "{{email}}"
+                    readonly
+                >
+                <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="phone">Phone Number: </label>
+                <input 
+                    type="tel" 
+                    id="phone" 
+                    name="phone" 
+                    placeholder="Enter phone number"
+                    value = "{{phone}}"
+                    readonly
+                >       
+                <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="guests">Number of Guests: </label>
+                <input
+                    type="number"
+                    id="guests" 
+                    name="guests"
+                    placeholder="Enter number of guests"  
+                    required
+                >
+                <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="res_date">Date: </label>
+                <input 
+                    type="date"
+                    id="res_date"  
+                    name="res_date" 
+                    required
+                >
+                <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="res_time">Time: </label>
+                <input 
+                    type="time"
+                    id="res_time"      
+                    name="res_time"
+                    required
+                >
+               
+               <button type="submit">SUBMIT </button>               
+        </div>
+    
+</body>
+</form>
+{% endblock %}

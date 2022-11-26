@@ -1,0 +1,69 @@
+{% extends "basepage.html" %}
+{% block title %}
+    Table Reservations - Payment
+{% endblock %}
+{% block content%}
+
+<head>  
+<link rel="stylesheet" type="text/css" href="../static/Styles/styling.css">   
+</head>
+
+<form method = "POST">
+<body>
+    <center> <h1 style="color: black; font-family: Yeseva One;">Credit Card Information</h1> </center>   
+        <div class="container">
+                <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="card_no">Card Number: </label>
+                <input 
+                    type="number"  
+                    id="card_no"
+                    name="card_no"
+                    placeholder="Enter credit card number"
+                    value = "{{card_no}}"
+                    required
+                >
+                <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="cvv">Security Code: </label>
+                <input 
+                    type="number"  
+                    id="cvv"
+                    name="cvv"
+                    placeholder="Enter CVV"
+                    maxlength=3
+                    value = "{{cvv}}"
+                    required
+                >
+                <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="exp_date">Expiration Date: </label>
+                <input 
+                    type="month"  
+                    id="exp_date"
+                    name="exp_date"
+                    placeholder="Enter expiration date"
+                    value = "{{exp_date}}"
+                    required
+                >
+                <label style="font-size:larger" style="color:rgb(0, 0, 0)" for="card_name">Name on Card: </label>
+                <input 
+                    type="text" 
+                    id ="card_name"
+                    name="card_name"
+                    placeholder="Enter name on credit card"
+                    value = "{{card_name}}"
+                    required
+                >
+ 
+                <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="bill_address">Billing Address: </label>
+                <input 
+                    type="text" 
+                    id="bill_address" 
+                    name="bill_address" 
+                    placeholder="Enter billing address"
+                    value = "{{bill_address}}"
+                    required
+                >       
+               {% if user.is_authenticated %}
+               <input type="checkbox"> Same as mailing address <br> <br>
+               {% endif %}
+               <button type="submit">SUBMIT </button>               
+        </div>
+</body>
+</form>
+{% endblock %}

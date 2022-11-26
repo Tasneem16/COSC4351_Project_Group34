@@ -1,0 +1,196 @@
+body {  
+  font-family: Calibri, Helvetica, sans-serif;  
+  background-color: lightblue;  
+  margin: 0;
+  padding: 20;
+  background-image: url("../images/restimage.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* background-image: url('Roads.jpg'); */
+}
+
+.navigation {
+	width: 80%;
+	margin: 0 auto;
+}
+
+header {
+  background: rgb(43, 42, 42);
+  padding-bottom: 0.3rem;
+  margin-bottom: 20px;
+}
+
+header::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.header-logo{
+  padding-top: 6px; 
+  padding-left: 15px; 
+  width: 16rem;
+  float: left; 
+}
+
+/* NAV TAB */
+
+nav {
+  margin-top: 0px;
+  padding: 24px;
+  /* text-align: center; */
+  background:rgb(43, 42, 42);;
+}
+
+nav a {
+  transition: 0.3s ease;
+  color: white;
+  font-size: 22px;
+  font-family: 'Gill Sans';
+  text-decoration: none;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  padding: 20px 10px;
+  margin: 0 5px;
+  position: static;
+}
+
+nav a:hover {
+  text-decoration: none;
+  font-size: 19px;
+  color: white;
+  border-top: 4px solid white;
+  border-bottom: 4px solid white;
+  padding: 6px 0; 
+}
+
+/* FOOTER */
+
+.box{
+  width: auto;
+  height: auto;
+  font-family: 'Gill Sans';
+}
+
+.footer-container{
+  padding-top: 10px;
+  padding-left: 100px;
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr; 
+}
+
+ 
+footer {
+  padding-top: 20px;
+  position: fixed; 
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100px; 
+  /* text-align: center;*/ 
+  padding: 3px;
+  background-color: rgb(0, 0, 0);
+  background-color: rgb(43, 42, 42);
+  color: white;
+} 
+
+footer::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.footer-logo{
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 15px; 
+  width: 16rem;
+  float: left; 
+}
+
+/* BUTTONS AND INPUT FIELDS */
+
+button {   
+       background-color: #4CAF50;   
+       width: 100%;  
+        color: white;   
+        padding: 15px;   
+        margin: 10px 0px;   
+        border: none;   
+        cursor: pointer;   
+         }   
+      
+    input[type=text],input[type=email], input[type=date], input[type=number], input[type=time], input[type=tel], input[type=password], input[type=month] {   
+      width: 100%;   
+      margin: 8px 0;  
+      padding: 10px 20px;   
+      box-shadow: 0 0 5px 1px;
+      border-radius: 10px; 
+      display: inline-block;
+      border: 5px solid lightblue; 
+      box-sizing: border-box;    
+      background-color: rgba(255, 255, 255, 0.9);
+    }   
+
+  .inputData input{
+  margin-left: 9rem;
+}
+
+.inputData label{
+  position: absolute;
+}
+   
+  button:hover {   
+        opacity: 17;   
+    }
+
+  .container {
+        height:auto;
+        width: auto;
+        margin: auto;  
+        padding: 30px;
+        padding-bottom: 100px;  
+        background: rgba(255, 255, 255, 0.75);  
+        border-radius: 15px ;
+    }
+
+@page {
+  margin-bottom: 61px;
+}
+
+ table {
+  border-radius: 10px 10px 10px 10px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,0.20);
+  text-align: center;
+  width: auto;
+}
+
+   .tablebox {
+  width: 750px;  
+  overflow: auto;  
+  margin: auto;  
+  background: rgba(255, 255, 255, 0.75);
+  padding: 30px;
+  border-radius: 15px;  
+}
+
+.tablebox thead tr{
+  background-color: #009879;
+}
+
+.tablebox tbody tr{
+  border-bottom: 1px solid #dddddd;
+}
+
+.tablebox tbody tr:nth-of-type(odd){
+  background-color: #0808080e;
+}
+
+.tablebox tbody tr:last-of-type{
+  border-bottom: 2px solid #009879;
+}
+
+.tables {
+  padding: 2.5px;
+}

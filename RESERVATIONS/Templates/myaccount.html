@@ -1,0 +1,70 @@
+{% extends "basepage.html" %}
+{% block title %}
+    Table Reservation - My Account
+{% endblock %}
+{% block content%}
+
+<head>    
+<link rel="stylesheet" type="text/css" href="../static/Styles/styling.css">   
+</head>
+
+<form method = "POST">
+<body>
+    <center> <h1 style="color: black; font-family: Yeseva One;">Account Information</h1> </center>   
+        <div class="container">
+            <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="email"><b>Email: </b></label>
+            {{email}}
+            <br>
+            <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="diner_id"><b>Preferred Diner ID: </b></label>
+            {{diner_id}}
+            <br>
+            <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="earned_points"><b>Earned Points: </b></label>
+            {{earned_pts}}
+            <br>
+            <br>
+            <label style="font-size:larger" style="color:rgb(0, 0, 0)" for="firstname">First Name: </label>
+                <input 
+                    type="text" 
+                    id ="firstname"
+                    name="firstname"
+                    placeholder="Enter first name"
+                    maxlength = "50"
+                    value = "{{first_name}}" 
+                    required
+                >
+               <label style="font-size:larger" style="color:rgb(0, 0, 0)" for="lastname">Last Name: </label>
+                <input 
+                    type="text" 
+                    id ="lastname"
+                    name="lastname"
+                    placeholder="Enter last name"
+                    maxlength = "50"
+                    value = "{{last_name}}" 
+                    required
+                >
+                <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="phone">Phone Number: </label>
+                <input 
+                    type="tel" 
+                    id="phone" 
+                    name="phone" 
+                    placeholder="Enter phone number"
+                    value = "{{phone}}"
+                >       
+                <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="mail_address">Mailing Address: </label>
+                <input
+                    type="text"
+                    id="mail_address" 
+                    name="mail_address"
+                    placeholder="Enter mailing address"
+                    value = "{{mail_address}}"  
+                    required
+                >
+               
+               <br>
+               <button type="submit">UPDATE ACCOUNT</button> <br>
+                             
+        </div>
+    
+</body>
+</form>
+{% endblock %}

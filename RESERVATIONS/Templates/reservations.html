@@ -1,0 +1,44 @@
+{% extends "basepage.html" %}
+{% block title %}
+    Table Reservation - View Reservations
+{% endblock %}
+{% block content%}
+
+<head>  
+<link rel="stylesheet" type="text/css" href="../static/Styles/styling.css">   
+</head>
+
+<form method = "POST">
+<body>
+    <center> <h1 style="color: black; font-family: Yeseva One;">Your Reservations</h1> </center>   
+        <div class="tablebox">
+          <center>      
+           <table>
+              <thead>
+                <tr>
+                    <center>
+                    <th style="width: 200px;">Guest Name</th>
+                    <th style="width: 200px;">Reservation ID</th>
+                    <th style="width: 200px;">Reservation Date</th>
+                    <th style="width: 200px;">Reservation Time</th>
+                    <th style="width: 200px;">Number of Guests</th>
+                    </center>
+                </tr>
+                </thead>
+              <tbody>
+                {% for reservation in reserve_list %}
+                <tr>
+                    <td>{{ reservation.name }}</td>
+                    <td>{{ reservation.res_id }}</td>
+                    <td>{{ reservation.res_date }}</td>
+                    <td>{{ reservation.res_time }}</td>
+                    <td>{{ reservation.no_guest }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+           </table>
+          </center>   
+        </div>
+</body>
+</form>
+{% endblock %}

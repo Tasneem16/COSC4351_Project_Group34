@@ -1,0 +1,28 @@
+{% extends "basepage.html" %}
+{% block title %}
+    Table Selection
+{% endblock %}
+{% block content%}
+
+<head>  
+<link rel="stylesheet" type="text/css" href="../static/Styles/styling.css">   
+</head>
+
+<form method = "POST">
+<body>
+    <center> <h1 style="color: black; font-family: Yeseva One;">Table Selection</h1> </center>   
+        <div class="container">
+            <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="tables"><b>Select necessary table(s): </b></label>
+            <br>
+                    <select class="tables" id="tables" name="tables" multiple required>
+                        <option value="Table 1 (Max Capacity: 2)">Table 1 (Max Capacity: 2)</option>
+                        <option value="Table 2 (Max Capacity: 4)">Table 2 (Max Capacity: 4)</option>
+                        <option value="Table 3 (Max Capacity: 6)">Table 3 (Max Capacity: 6)</option>
+                        <option value="Table 4 (Max Capacity: 8)">Table 4 (Max Capacity: 8)</option>
+                    </select>
+            <button type="submit">SUBMIT </button>
+        </div>
+
+</body>
+</form>
+{% endblock %}

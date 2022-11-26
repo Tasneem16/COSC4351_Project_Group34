@@ -1,0 +1,42 @@
+{% extends "basepage.html" %}
+{% block title %}
+    Table Reservation - Login Page
+{% endblock %}
+{% block content%}
+
+<head>    
+<link rel="stylesheet" type="text/css" href="../static/Styles/styling.css">   
+</head>
+
+<form method = "POST">
+<body>
+        <center> <h1 style="color: black; font-family: Yeseva One;">User Login</h1> </center>   
+        <div class="container">
+                <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="email">Email: </label>
+                <input 
+                    type="email"  
+                    id="email"
+                    name="email" 
+                    placeholder="Enter email"
+                    required
+                >
+                
+                <label style="font-size:larger" style="color:rgb(0, 0, 0)" for="password">Password: </label>
+                <input
+                    type="password"
+                    id="password1"
+                    name="password1"
+                    placeholder="Enter password"
+                    required
+                >
+                
+            <br> <br> <input type="checkbox"> Remember me <br>
+            <button type="submit">LOGIN</button> <br>
+            <center>       
+            <h1 style="font-size:large" style="color:rgb(4, 0, 255)">Don't have an account? <a href="/registerpage"> Register Here </a>  </h1>
+            </center>               
+        </div>
+    
+</body>
+</form>
+{% endblock %}
