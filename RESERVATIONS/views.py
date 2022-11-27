@@ -29,7 +29,7 @@ def home():
         user = User.query.filter_by(email=email).first()
 
         availseats = Reservation.query.filter_by(res_date=res_date, res_time=res_time)
-        total = guests
+        total = int(guests)
 
         for x in availseats:
             total += x.no_guest
@@ -46,9 +46,9 @@ def home():
             flash('Number of guests cannot be zero. Please enter a valid number!', category='error')
         elif datetime.strptime(res_date, '%Y-%m-%d').date() < today_date:
             flash('Reservation Date cannot be a past date. Please enter a valid date!', category='error')
-        elif float(total) > 20:
+        elif total > 20:
             flash('Seats for the selected date and time are not available. please select other times!!', category='error')
-        elif float(total) <= 20:
+        elif total <= 20:
             new_reservation = Reservation(name=name, email=email, phone=phone_no, no_guest=guests,
                                        res_date=res_date, res_time=res_time)
             db.session.add(new_reservation)
@@ -130,7 +130,7 @@ def reserve():
             today_date = date.today()
 
             availseats = Reservation.query.filter_by(res_date=res_date, res_time=res_time)
-            total = guests
+            total = int(guests)
 
             for x in availseats:
                 total += x.no_guest
@@ -141,10 +141,10 @@ def reserve():
                 flash('Number of guests cannot be zero. Please enter a valid number!', category='error')
             elif datetime.strptime(res_date, '%Y-%m-%d').date() < today_date:
                 flash('Reservation Date cannot be a past date. Please enter a valid date!', category='error')
-            elif float(total) > 20:
+            elif total > 20:
                 flash('Seats for the selected date and time are not available. please select other times!!',
                       category='error')
-            elif float(total) <= 20:
+            elif total <= 20:
                 new_reservation = Reservation(name=name, email=email, phone=phone_no, no_guest=guests,
                                               res_date=res_date, res_time=res_time, user_id=current_user.id)
                 db.session.add(new_reservation)
