@@ -47,7 +47,8 @@ class Creditcard(db.Model):
 class Tables(db.Model):
      table_id = db.Column(db.Integer, primary_key=True)
      capacity = db.Column(db.String(200), nullable=False)
-     reservations = db.relationship('Reservation')
+     reserve_date = db.Column(db.String(100), nullable=False)
+     reserve_time = db.Column(db.String(100), nullable=False)
 
      def __repr__(self):
-        return f"Tables('{self.table_id}', '{self.capacity}', '{self.reservations}')"
+        return f"Tables('{self.table_id}', '{self.capacity}', '{self.reserve_date}', '{self.reserve_time}')"
