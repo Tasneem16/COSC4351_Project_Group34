@@ -1,0 +1,41 @@
+{% extends "basepage.html" %}
+{% block title %}
+    Table Selection
+{% endblock %}
+{% block content%}
+
+<head>  
+<link rel="stylesheet" type="text/css" href="../static/Styles/styling.css">   
+</head>
+
+<form method = "POST">
+<body>
+    <center> <h1 style="color: black; font-family: Yeseva One;">Table Selection</h1> </center>   
+        <div class="container">
+            Our restaurant has 4 tables (with capacities of 2, 4, 6, 8) and if unavailable, tables can be combined.
+            <br> <br>
+            <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="tables"><b>Select necessary table(s): </b></label>
+            <br>
+                    <select class="tables" id="tables" name="tables" required>
+                        <option value="Table of 2">Table of 2</option>
+                        <option value="Table of 4">Table of 4</option>
+                        <option value="Table of 6">Table of 6</option>
+                        <option value="Table of 8">Table of 8</option>
+                        <option value="Combined Table of 2+4">Combined Table of 2+4</option>
+                        <option value="Combined Table of 2+6">Combined Table of 2+6</option>
+                        <option value="Combined Table of 2+8">Combined Table of 2+8</option>
+                        <option value="Combined Table of 4+8">Combined Table of 4+8</option>
+                        <option value="Combined Table of 6+8">Combined Table of 6+8</option>
+                        <option value="Combined Table of 4+6">Combined Table of 4+6</option>
+                        <option value="Combined Table of 2+4+6">Combined Table of 2+4+6</option>
+                        <option value="Combined Table of 2+4+8">Combined Table of 2+4+8</option>
+                        <option value="Combined Table of 2+6+8">Combined Table of 2+6+8</option>
+                        <option value="Combined Table of 4+6+8">Combined Table of 4+6+8</option>
+                        <option value="Combined Table of 2+4+6+8">Combined Table of 2+4+6+8</option>
+                    </select>
+            <button type="submit">SUBMIT </button>
+        </div>
+
+</body>
+</form>
+{% endblock %}
