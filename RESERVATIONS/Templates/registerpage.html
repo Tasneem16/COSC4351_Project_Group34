@@ -1,0 +1,90 @@
+{% extends "basepage.html" %}
+{% block title %}
+    Table Reservation - Registration Page
+{% endblock %}
+{% block content%}
+
+<head>
+<link rel="stylesheet" type="text/css" href="../static/Styles/styling.css">   
+</head>
+
+<form method = "POST">
+<body>
+        <center> <h1 style="color: black; font-family: Yeseva One;">User Registeration</h1> </center>   
+        <div class="container">
+            <label style="font-size:larger" style="color:rgb(0, 0, 0)" for="firstname">First Name: </label>
+                <input 
+                    type="text" 
+                    id ="firstname"
+                    name="firstname"
+                    placeholder="Enter first name"
+                    maxlength = "50" 
+                    required
+                >
+               <label style="font-size:larger" style="color:rgb(0, 0, 0)" for="lastname">Last Name: </label>
+                <input 
+                    type="text" 
+                    id ="lastname"
+                    name="lastname"
+                    placeholder="Enter last name"
+                    maxlength = "50" 
+                    required
+                >
+                <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="email">Email: </label>
+                <input 
+                    type="email"  
+                    id="email"
+                    name="email" 
+                    placeholder="Enter email"
+                    required
+                >
+                <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="phone">Phone Number: </label>
+                <input 
+                    type="tel" 
+                    id="phone" 
+                    name="phone" 
+                    placeholder="Enter phone number"
+                >       
+                <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="mail_address">Mailing Address: </label>
+                <input
+                    type="text"
+                    id="mail_address" 
+                    name="mail_address"
+                    placeholder="Enter mailing address"  
+                    required
+                >
+                <br> <br>
+                <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="prefered_payment">Prefered Payment Method: </label>
+                <select class="prefered_payment" id="prefered_payment" name="prefered_payment"  required>
+                <option value="Cash">Cash</option>
+                <option value="Credit Card">Credit Card</option>
+                <option value="Check">Check</option>
+                </select>
+                <br> <br>
+
+                <label style="font-size:larger" style="color:rgb(0, 0, 0)" for="password1">Password: </label>
+                <input
+                    type="password"
+                    id="password1"
+                    name="password1"
+                    placeholder="Enter a password"
+                    required
+                >
+                <label style="font-size:larger" style="color:rgb(0, 0, 0)" for="password2">Confirm Password: </label>
+                <input
+                    type="password"
+                    id="password2"
+                    name="password2"
+                    placeholder="Re-enter password"
+                    required
+                >
+               
+               <br>
+               <button type="submit">REGISTER</button> <br>
+               <center>       
+               <h1 style="font-size:large" style="color:rgb(4, 0, 255)">Already have an account? <a href="/loginscreen"> Sign in </a>  </h1>
+               </center>               
+        </div>
+</body>
+</form>
+{% endblock %}
