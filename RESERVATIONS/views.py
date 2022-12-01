@@ -21,7 +21,7 @@ def about():
 
 @views.route("/homescreen", methods=['GET', 'POST'])
 def home():
-    if request.method == 'POST':
+    if request.method == 'POST':            #Tells webserver to take data entered in the form
         name = request.form.get('name')
         email = request.form.get('email')
         phone_no = request.form.get('phone')
@@ -39,10 +39,10 @@ def home():
         total = int(guests)
 
         for x in availseats:
-            total += x.no_guest
+            total += x.no_guest         #updating total with number of guests
 
         if user:
-            flash('Email already exists. Please log in to reserve.', category='error')
+            flash('Email already exists. Please log in to reserve.', category='error')          #validating all fields of the reservation form
         elif len(name) < 2 or len(name) > 50:
             flash('Name must be greater than 2 and less than 50 characters.', category='error')
         elif len(phone_no) != 10:
@@ -59,14 +59,14 @@ def home():
             flash('Seats for the selected date and time are not available. please select other times!!', category='error')
         elif total <= 20:
             new_reservation = Reservation(name=name, email=email, phone=phone_no, no_guest=guests,
-                                       res_date=res_date, res_time=res_time)
-            db.session.add(new_reservation)
+                                       res_date=res_date, res_time=res_time)            #creating a new reservation if less than max occupancy
+            db.session.add(new_reservation)         #pushing to database
             db.session.commit()
             global guest_res
             guest_res = [name, email, phone_no, guests, res_date, res_time]
-            if (cur_date.month == 7 and cur_date.day == 4) or (cur_date.month == 12 and cur_date.day == 25) or (cur_date.month == 1 and cur_date.day == 1) or (cur_date.weekday() > 4):
-                flash('Hold fee is required to reserve for selected date since it is special day booking.', category='error')
-            flash('Please create an account for the best user experience!', category='success')
+            if (cur_date.month == 7 and cur_date.day == 4) or (cur_date.month == 12 and cur_date.day == 25) or (cur_date.month == 1 and cur_date.day == 1) or (cur_date.weekday() > 4):   #defining special days such as christmas, independance day, the weekends, etc.
+                flash('Hold fee is required to reserve for selected date since it is special day booking.', category='error')           #notifying user of hold fee due to special day
+            flash('Please create an account for the best user experience!', category='success')         #encouraging user to make an account.
             flash('Please select a table to complete reservation.', category='success')
             return redirect(url_for('views.tables'))
 
@@ -86,7 +86,7 @@ def account():
             user_phone = user.phone
             user_mailadd = user.mailing_add
             user_prefer_payment = user.prefered_payment
-    elif request.method == 'POST':
+    elif request.method == 'POST':          #Tells webserver to take data entered in the form below
         if user:
             user.user_fname = request.form.get('firstname')
             user.user_lname = request.form.get('lastname')
@@ -94,13 +94,13 @@ def account():
             user.mailing_add = request.form.get('mail_address')
             user.prefered_payment = request.form.get('prefered_payment')
             if len(user.user_fname) < 2 or len(user.user_fname) > 20:
-                flash('First name must be greater than 2 and less than 20 characters.', category='error')
+                flash('First name must be greater than 2 and less than 20 characters.', category='error')       #validating user information
             elif len(user.user_lname) < 2 or len(user.user_lname) > 20:
                 flash('Last name must be greater than 2 and less than 20 characters.', category='error')
             elif len(user.phone) != 10:
                 flash('Phone number should be a 10-digit number.', category='error')
             else:
-                db.session.commit()
+                db.session.commit()         #updating database account info
                 flash('Your account has been updated!', category='success')
                 return redirect(url_for('views.account'))
 
@@ -111,7 +111,7 @@ def account():
 @views.route("/selecttable", methods=['GET', 'POST'])
 def tables():
     global guest_res
-    if request.method == 'POST':
+    if request.method == 'POST':            #Tells webserver to take data entered in the form
         if current_user.is_authenticated:
             user = User.query.get(current_user.id)
             res_list = user.reservations
@@ -125,12 +125,12 @@ def tables():
                 booked = Tables.query.filter_by(reserve_date=user_res_date, reserve_time=user_res_time, capacity=table).first()
                 if booked:
                     flash('The selected table for the selected date and time is not available. Please select combined tables to reserve.',
-                          category='error')
+                          category='error')         #giving customer opportunity to combine tables since requested table is not available
                 else:
                     new_table = Tables(capacity=table, reserve_date=user_res_date, reserve_time=user_res_time)
-                    db.session.add(new_table)
+                    db.session.add(new_table)       #pushing to database
                     db.session.commit()
-                    flash('Your reservation is final and no show will be charged minimum $10.', category='error')
+                    flash('Your reservation is final and no show will be charged minimum $10.', category='error')       #notifying user of fee for not showing up
                     user_card = user.creditcards
                     if user_card and user.prefered_payment == 'Credit Card':
                         if len(user_card) > 1:
@@ -140,9 +140,9 @@ def tables():
                         return redirect(url_for('views.reserved'))
                     elif user_card and user.prefered_payment != 'Credit Card':
                         if user.prefered_payment == 'Cash' or user.prefered_payment == 'Check':
-                            if (cur_date.month == 7 and cur_date.day == 4) or (cur_date.month == 12 and cur_date.day == 25) or (cur_date.month == 1 and cur_date.day == 1) or (cur_date.weekday() > 4):
+                            if (cur_date.month == 7 and cur_date.day == 4) or (cur_date.month == 12 and cur_date.day == 25) or (cur_date.month == 1 and cur_date.day == 1) or (cur_date.weekday() > 4):     #defining special days
                                 flash('Hold fee will be charged and a valid credit card on system is required to reserve the selected table since it is special day booking.',
-                                    category='error')
+                                    category='error')       #notifying customer of hold fee for special day
                                 flash('Please enter credit card details to confirm reservation.', category='error')
                                 return redirect(url_for('views.payments'))
                             else:
@@ -151,12 +151,12 @@ def tables():
                     else:
                         if user.prefered_payment == 'Credit Card':
                             flash('Since your prefered payment method is credit card, please enter your credit card details.',
-                                category='success')
+                                category='success')     #prompting user to add credit card to continue
                             return redirect(url_for('views.payments'))
                         elif user.prefered_payment == 'Cash' or user.prefered_payment == 'Check':
-                            if (cur_date.month == 7 and cur_date.day == 4) or (cur_date.month == 12 and cur_date.day == 25) or (cur_date.month == 1 and cur_date.day == 1) or (cur_date.weekday() > 4):
+                            if (cur_date.month == 7 and cur_date.day == 4) or (cur_date.month == 12 and cur_date.day == 25) or (cur_date.month == 1 and cur_date.day == 1) or (cur_date.weekday() > 4):     #defining special days
                                 flash('Hold fee will be charged and a valid credit card on system is required to reserve the selected table since it is special day booking.',
-                                    category='error')
+                                    category='error')       #notification of hold fee
                                 flash('Please enter credit card details to confirm reservation.', category='error')
                                 return redirect(url_for('views.payments'))
                             else:
@@ -174,15 +174,15 @@ def tables():
                 booked = Tables.query.filter_by(reserve_date=guest_res_date, reserve_time=guest_res_time, capacity=table).first()
                 if booked:
                     flash('The selected table for the selected date and time is not available. Please select combined tables to reserve.',
-                          category='error')
+                          category='error')     #giving customer opportunity to combine tables since requested table is unavailable
                     break
                 else:
                     new_table = Tables(capacity=table, reserve_date=guest_res_date, reserve_time=guest_res_time)
-                    db.session.add(new_table)
+                    db.session.add(new_table)       #pushing to database
                     db.session.commit()
-                    if (cur_date.month == 7 and cur_date.day == 4) or (cur_date.month == 12 and cur_date.day == 25) or (cur_date.month == 1 and cur_date.day == 1) or (cur_date.weekday() > 4):
+                    if (cur_date.month == 7 and cur_date.day == 4) or (cur_date.month == 12 and cur_date.day == 25) or (cur_date.month == 1 and cur_date.day == 1) or (cur_date.weekday() > 4):     #defining special days
                         flash('Hold fee will be charged to reserve the selected table since it is special day booking.',
-                              category='error')
+                              category='error')         #notification of hold fee
                     flash('Your reservation is final and no show will be charged minimum $10.', category='error')
                     return redirect(url_for('views.guestpayment'))
 
@@ -205,7 +205,7 @@ def reserve():
         user_email = user.email
         user_phone = user.phone
 
-        if request.method == 'POST':
+        if request.method == 'POST':            #Tells webserver to take data entered in the form below
             name = request.form.get('name')
             email = request.form.get('email')
             phone_no = request.form.get('phone')
@@ -221,10 +221,10 @@ def reserve():
             total = int(guests)
 
             for x in availseats:
-                total += x.no_guest
+                total += x.no_guest     #updating total with number of guests
 
             if float(guests) < 0:
-                flash('Number of guests cannot be negative. Please enter a valid number!', category='error')
+                flash('Number of guests cannot be negative. Please enter a valid number!', category='error')        #validating reservation form details
             elif float(guests) == 0:
                 flash('Number of guests cannot be zero. Please enter a valid number!', category='error')
             elif datetime.strptime(res_date, '%Y-%m-%d').date() < time_now.date():
@@ -236,17 +236,17 @@ def reserve():
                       category='error')
             elif total <= 20:
                 new_reservation = Reservation(name=name, email=email, phone=phone_no, no_guest=guests,
-                                              res_date=res_date, res_time=res_time, user_id=current_user.id)
-                db.session.add(new_reservation)
+                                              res_date=res_date, res_time=res_time, user_id=current_user.id)        #creating resrvation if under maximum occupancy
+                db.session.add(new_reservation)     #pushing to database
                 db.session.commit()
                 if user.prefered_payment == 'Credit Card':
-                    if (cur_date.month == 7 and cur_date.day == 4) or (cur_date.month == 12 and cur_date.day == 25) or (cur_date.month == 1 and cur_date.day == 1) or (cur_date.weekday() > 4):
+                    if (cur_date.month == 7 and cur_date.day == 4) or (cur_date.month == 12 and cur_date.day == 25) or (cur_date.month == 1 and cur_date.day == 1) or (cur_date.weekday() > 4):     #defining special days
                         flash('Hold fee is required to reserve for selected date since it is special day booking.',
-                              category='error')
+                              category='error')     #notification of hold fee
                 elif user.prefered_payment == 'Cash' or user.prefered_payment == 'Check':
-                    if (cur_date.month == 7 and cur_date.day == 4) or (cur_date.month == 12 and cur_date.day == 25) or (cur_date.month == 1 and cur_date.day == 1) or (cur_date.weekday() > 4):
+                    if (cur_date.month == 7 and cur_date.day == 4) or (cur_date.month == 12 and cur_date.day == 25) or (cur_date.month == 1 and cur_date.day == 1) or (cur_date.weekday() > 4):     #defining special days
                         flash('Hold fee is required and a valid credit card on system is required to reserve for selected date since it is special day booking.',
-                              category='error')
+                              category='error')     #notification of hold fee and card requirement
                 flash('Please select a table to complete reservation.', category='success')
                 return redirect(url_for('views.tables'))
 
@@ -254,7 +254,7 @@ def reserve():
 
 @views.route("/payments", methods=['GET', 'POST'])
 def payments():
-    if request.method == 'POST':
+    if request.method == 'POST':            #Tells webserver to take data entered in the form below
         card_no = request.form.get('card_no')
         cvv_code = request.form.get('cvv')
         exp_date = request.form.get('exp_date')
@@ -264,13 +264,13 @@ def payments():
         time_now = datetime.now(time_zone)
 
         if len(cvv_code) != 3:
-            flash('Security code should be of 3 digits.', category='error')
+            flash('Security code should be of 3 digits.', category='error')         #validating credit card information
         elif datetime.strptime(exp_date, '%Y-%m').date() < time_now.date():
             flash('Expired credit cards are not accepted. Please enter a valid expiry date!', category='error')
         else:
             new_payment = Creditcard(user_id=current_user.id, credit_num=card_no, name_oncard=card_name,
-                                     cvv_num=cvv_code, exp_date=exp_date, billing_add=bill_add)
-            db.session.add(new_payment)
+                                     cvv_num=cvv_code, exp_date=exp_date, billing_add=bill_add)         #adding credit card to account 
+            db.session.add(new_payment)     #pushing info to database
             db.session.commit()
             flash('Each reservation is final and no show will be charged minimum $10.',category='error')
             flash('Your Table(s) has been reserved.', category='success')
@@ -298,7 +298,7 @@ def payments():
 @views.route("/guestpayment", methods=['GET', 'POST'])
 def guestpayment():
     global guest_res
-    if request.method == 'POST':
+    if request.method == 'POST':            #Tells webserver to take data entered in the form below
         resquery = Reservation.query.filter_by(name=guest_res[0],
                                       email=guest_res[1],
                                       phone=guest_res[2],
@@ -315,16 +315,16 @@ def guestpayment():
             time_now = datetime.now(time_zone)
 
             if len(cvv_code) != 3:
-                flash('Security code should be of 3 digits.', category='error')
+                flash('Security code should be of 3 digits.', category='error')         #validating credit card information
                 break
             elif datetime.strptime(exp_date, '%Y-%m').date() < time_now.date():
                 flash('Expired credit cards are not accepted. Please enter a valid expiry date!', category='error')
                 break
             else:
                 new_payment = Creditcard(res_id=i.res_id, credit_num=card_no, name_oncard=card_name,
-                                         cvv_num=cvv_code, exp_date=exp_date, billing_add=bill_add)
+                                         cvv_num=cvv_code, exp_date=exp_date, billing_add=bill_add)     #adding credit card to account
 
-                db.session.add(new_payment)
+                db.session.add(new_payment)     #pushing to database
                 db.session.commit()
                 flash('Your reservation is final and no show will be charged minimum $10.', category='error')
                 flash('Your Table(s) has been reserved.', category='success')
