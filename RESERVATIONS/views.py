@@ -15,6 +15,10 @@ def homepage():
     else:
         return redirect(url_for('views.home'))
 
+@views.route("/aboutpage", methods=['GET', 'POST'])
+def about():
+    return render_template('aboutpage.html', user=current_user)
+
 @views.route("/homescreen", methods=['GET', 'POST'])
 def home():
     if request.method == 'POST':
@@ -68,9 +72,41 @@ def home():
 
     return render_template('homescreen.html', user=current_user)
 
-@views.route("/aboutpage", methods=['GET', 'POST'])
-def about():
-    return render_template('aboutpage.html', user=current_user)
+@views.route("/myaccount", methods=['GET', 'POST'])
+@login_required
+def account():
+    user = User.query.get(current_user.id)
+    if request.method == 'GET':
+        if user:
+            user_email = user.email
+            user_diner_id = current_user.id
+            user_earned_pts = user.earned_pts
+            user_firstname = user.user_fname
+            user_lastname = user.user_lname
+            user_phone = user.phone
+            user_mailadd = user.mailing_add
+            user_prefer_payment = user.prefered_payment
+    elif request.method == 'POST':
+        if user:
+            user.user_fname = request.form.get('firstname')
+            user.user_lname = request.form.get('lastname')
+            user.phone = request.form.get('phone')
+            user.mailing_add = request.form.get('mail_address')
+            user.prefered_payment = request.form.get('prefered_payment')
+            if len(user.user_fname) < 2 or len(user.user_fname) > 20:
+                flash('First name must be greater than 2 and less than 20 characters.', category='error')
+            elif len(user.user_lname) < 2 or len(user.user_lname) > 20:
+                flash('Last name must be greater than 2 and less than 20 characters.', category='error')
+            elif len(user.phone) != 10:
+                flash('Phone number should be a 10-digit number.', category='error')
+            else:
+                db.session.commit()
+                flash('Your account has been updated!', category='success')
+                return redirect(url_for('views.account'))
+
+    return render_template("myaccount.html", user=current_user, email=user_email, diner_id=user_diner_id,
+                           earned_pts=user_earned_pts, first_name=user_firstname, last_name=user_lastname,
+                           phone=user_phone, mail_address=user_mailadd, prefered_payment=user_prefer_payment)
 
 @views.route("/selecttable", methods=['GET', 'POST'])
 def tables():
@@ -152,41 +188,14 @@ def tables():
 
     return render_template('selecttable.html', user=current_user)
 
-@views.route("/myaccount", methods=['GET', 'POST'])
-@login_required
-def account():
-    user = User.query.get(current_user.id)
-    if request.method == 'GET':
-        if user:
-            user_email = user.email
-            user_diner_id = current_user.id
-            user_earned_pts = user.earned_pts
-            user_firstname = user.user_fname
-            user_lastname = user.user_lname
-            user_phone = user.phone
-            user_mailadd = user.mailing_add
-            user_prefer_payment = user.prefered_payment
-    elif request.method == 'POST':
-        if user:
-            user.user_fname = request.form.get('firstname')
-            user.user_lname = request.form.get('lastname')
-            user.phone = request.form.get('phone')
-            user.mailing_add = request.form.get('mail_address')
-            user.prefered_payment = request.form.get('prefered_payment')
-            if len(user.user_fname) < 2 or len(user.user_fname) > 20:
-                flash('First name must be greater than 2 and less than 20 characters.', category='error')
-            elif len(user.user_lname) < 2 or len(user.user_lname) > 20:
-                flash('Last name must be greater than 2 and less than 20 characters.', category='error')
-            elif len(user.phone) != 10:
-                flash('Phone number should be a 10-digit number.', category='error')
-            else:
-                db.session.commit()
-                flash('Your account has been updated!', category='success')
-                return redirect(url_for('views.account'))
 
-    return render_template("myaccount.html", user=current_user, email=user_email, diner_id=user_diner_id,
-                           earned_pts=user_earned_pts, first_name=user_firstname, last_name=user_lastname,
-                           phone=user_phone, mail_address=user_mailadd, prefered_payment=user_prefer_payment)
+
+@views.route("/reservations", methods=['GET', 'POST'])
+def reserved():
+    user = User.query.get(current_user.id)
+    reserve_list = user.reservations
+    return render_template("reservations.html", user=current_user, reserve_list=reserve_list)
+
 
 @views.route("/reserving", methods=['GET', 'POST'])
 def reserve():
@@ -323,10 +332,5 @@ def guestpayment():
 
     return render_template('payments.html', user=current_user)
 
-@views.route("/reservations", methods=['GET', 'POST'])
-def reserved():
-    user = User.query.get(current_user.id)
-    reserve_list = user.reservations
-    return render_template("reservations.html", user=current_user, reserve_list=reserve_list)
 
 

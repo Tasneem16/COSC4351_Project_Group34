@@ -27,7 +27,7 @@
                     type="text" 
                     id ="firstname"
                     name="firstname"
-                    placeholder="Enter first name"
+                    placeholder="Enter first name: "
                     maxlength = "50"
                     value = "{{first_name}}" 
                     required
@@ -37,7 +37,7 @@
                     type="text" 
                     id ="lastname"
                     name="lastname"
-                    placeholder="Enter last name"
+                    placeholder="Enter last name: "
                     maxlength = "50"
                     value = "{{last_name}}" 
                     required
@@ -47,7 +47,7 @@
                     type="tel" 
                     id="phone" 
                     name="phone" 
-                    placeholder="Enter phone number"
+                    placeholder="Enter phone number: "
                     value = "{{phone}}"
                 >       
                 <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="mail_address">Mailing Address: </label>
@@ -55,13 +55,14 @@
                     type="text"
                     id="mail_address" 
                     name="mail_address"
-                    placeholder="Enter mailing address"
+                    placeholder="Enter mailing address: "
                     value = "{{mail_address}}"  
                     required
                 >
                <label  style="font-size:larger" style="color:rgb(0, 0, 0)" for="prefered_payment">Prefered Payment Method: </label>
                 <select class="prefered_payment" id="prefered_payment" name="prefered_payment"  required>
                 <option value="{{prefered_payment}}" selected>{{prefered_payment}}</option>
+                <option value=""></option>
                 <option value="Cash">Cash</option>
                 <option value="Credit Card">Credit Card</option>
                 <option value="Check">Check</option>
