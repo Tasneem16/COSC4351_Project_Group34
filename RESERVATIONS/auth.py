@@ -7,32 +7,6 @@ from flask_login import login_user, logout_user, current_user
 auth = Blueprint('auth', __name__)
 
 
-@auth.route('/loginscreen', methods=['GET', 'POST'])        #Logging in
-def login():
-    if request.method == 'POST':        #Tells webserver to take data entered in the form
-        email = request.form.get('email')
-        password = request.form.get('password1')
-
-        user = User.query.filter_by(email=email).first()
-        if user:
-            if check_password_hash(user.password, password):
-                login_user(user, remember=True)
-                flash('Logged in successfully!', category='success')
-                return redirect(url_for('views.reserve'))       #if password and email matched one in database, it takes them to the screen to reserve
-            else:
-                flash('Incorrect password, try again.', category='error')       #notifies of wrong password
-        else:
-            flash('Email does not exist.', category='error')        #notifies account with that email doesnt exist
-
-    return render_template("loginscreen.html", user=current_user)
-
-
-@auth.route('/logout')      #Logging out
-def logout():
-    logout_user()
-    flash('Logged out successfully!', category='success')       #notifies user they have signed out
-    return redirect(url_for('auth.login'))
-
 
 @auth.route('/registerpage', methods=['GET', 'POST'])       #creating an account
 def sign_up():
@@ -70,3 +44,31 @@ def sign_up():
             return redirect(url_for('auth.login'))
 
     return render_template("registerpage.html", user=current_user)
+
+
+@auth.route('/loginscreen', methods=['GET', 'POST'])        #Logging in
+def login():
+    if request.method == 'POST':        #Tells webserver to take data entered in the form
+        email = request.form.get('email')
+        password = request.form.get('password1')
+
+        user = User.query.filter_by(email=email).first()
+        if user:
+            if check_password_hash(user.password, password):
+                login_user(user, remember=True)
+                flash('Logged in successfully!', category='success')
+                return redirect(url_for('views.reserve'))       #if password and email matched one in database, it takes them to the screen to reserve
+            else:
+                flash('Incorrect password, try again.', category='error')       #notifies of wrong password
+        else:
+            flash('Email does not exist.', category='error')        #notifies account with that email doesnt exist
+
+    return render_template("loginscreen.html", user=current_user)
+
+
+@auth.route('/logout')      #Logging out
+def logout():
+    logout_user()
+    flash('Logged out successfully!', category='success')       #notifies user they have signed out
+    return redirect(url_for('auth.login'))
+
