@@ -1,7 +1,7 @@
-from . import db
+from . import db                    #importing database
 from flask_login import UserMixin
 
-class User(db.Model, UserMixin):
+class User(db.Model, UserMixin):        #setting up parameters for user info entry fields
     id = db.Column(db.Integer, primary_key=True)
     user_fname = db.Column(db.String(20), nullable=False)
     user_lname = db.Column(db.String(20), nullable=False)
@@ -17,7 +17,7 @@ class User(db.Model, UserMixin):
     def __repr__(self):
         return f"User('{self.user_fname}', '{self.user_lname}', '{self.id}', '{self.email}')"
 
-class Reservation(db.Model):
+class Reservation(db.Model):         #setting up parameters for reservation info entry fields
     res_id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     name = db.Column(db.String, nullable=False)
@@ -32,7 +32,7 @@ class Reservation(db.Model):
         return f"User('{self.user_id}', '{self.res_id}', '{self.res_time}', '{self.res_date}', '{self.no_guest}'," \
                f"'{self.table_id}')"
 
-class Creditcard(db.Model):
+class Creditcard(db.Model):      #setting up parameters for credit card info entry fields
     card_id = db.Column(db.Integer, primary_key=True)
     res_id = db.Column(db.Integer, db.ForeignKey('reservation.res_id'))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
@@ -45,7 +45,7 @@ class Creditcard(db.Model):
     def __repr__(self):
         return f"Creditcard('{self.credit_num}', '{self.cvv_num}', '{self.exp_date}','{self.name_oncard}', '{self.billing_add}')"
 
-class Tables(db.Model):
+class Tables(db.Model):              #setting up parameters for table info entry fields
      table_id = db.Column(db.Integer, primary_key=True)
      capacity = db.Column(db.String(200), nullable=False)
      reserve_date = db.Column(db.String(100), nullable=False)
