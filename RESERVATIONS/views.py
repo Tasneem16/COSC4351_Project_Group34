@@ -249,16 +249,6 @@ def reserve():
                         flash('Hold fee is required to reserve for selected date since it is special day booking.',
                               category='error')     #notification of hold fee
 
-
-                #if user.prefered_payment == 'Credit Card':
-                 #   if (cur_date.month == 7 and cur_date.day == 4) or (cur_date.month == 12 and cur_date.day == 25) or (cur_date.month == 1 and cur_date.day == 1) or (cur_date.weekday() > 4):     #defining special days
-                  #      flash('Hold fee is required to reserve for selected date since it is special day booking.',
-                         #     category='error')     #notification of hold fee
-                #elif user.prefered_payment == 'Cash' or user.prefered_payment == 'Check':
-                    #if (cur_date.month == 7 and cur_date.day == 4) or (cur_date.month == 12 and cur_date.day == 25) or (cur_date.month == 1 and cur_date.day == 1) or (cur_date.weekday() > 4):     #defining special days
-                       # flash('Hold fee is required and a valid credit card on system is required to reserve for selected date since it is special day booking.',
-                             # category='error')     #notification of hold fee and card requirement
-
                 flash('Please select a table to complete reservation.', category='success')
                 return redirect(url_for('views.tables'))
 
