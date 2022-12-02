@@ -31,7 +31,7 @@ def create_app():
 
     return app
 
-# this is replace the old data with the new data
+# this replaces the old data with the new data in the database
 def create_database(app):
     if not path.exists('RESERVATIONS/' + 'site.db'):
         db.create_all(app=app)

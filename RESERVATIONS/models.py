@@ -32,6 +32,15 @@ class Reservation(db.Model):         #setting up parameters for reservation info
         return f"User('{self.user_id}', '{self.res_id}', '{self.res_time}', '{self.res_date}', '{self.no_guest}'," \
                f"'{self.table_id}')"
 
+class Tables(db.Model):         #setting up parameters for table info entry fields
+     table_id = db.Column(db.Integer, primary_key=True)
+     capacity = db.Column(db.String(200), nullable=False)
+     reserve_date = db.Column(db.String(100), nullable=False)
+     reserve_time = db.Column(db.String(100), nullable=False)
+
+     def __repr__(self):
+        return f"Tables('{self.table_id}', '{self.capacity}', '{self.reserve_date}', '{self.reserve_time}')"
+
 class Creditcard(db.Model):      #setting up parameters for credit card info entry fields
     card_id = db.Column(db.Integer, primary_key=True)
     res_id = db.Column(db.Integer, db.ForeignKey('reservation.res_id'))
@@ -44,12 +53,3 @@ class Creditcard(db.Model):      #setting up parameters for credit card info ent
 
     def __repr__(self):
         return f"Creditcard('{self.credit_num}', '{self.cvv_num}', '{self.exp_date}','{self.name_oncard}', '{self.billing_add}')"
-
-class Tables(db.Model):              #setting up parameters for table info entry fields
-     table_id = db.Column(db.Integer, primary_key=True)
-     capacity = db.Column(db.String(200), nullable=False)
-     reserve_date = db.Column(db.String(100), nullable=False)
-     reserve_time = db.Column(db.String(100), nullable=False)
-
-     def __repr__(self):
-        return f"Tables('{self.table_id}', '{self.capacity}', '{self.reserve_date}', '{self.reserve_time}')"
